@@ -6,6 +6,7 @@ from typing import Union
 
 from openapi_server.models.api_response import ApiResponse  # noqa: E501
 from openapi_server.models.pet import Pet  # noqa: E501
+from openapi_server import impl
 from openapi_server import util
 
 
@@ -21,7 +22,10 @@ def add_pet(body):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Pet.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+
+    return impl.add_pet(
+        body=body,  # noqa: E501
+    )
 
 
 def delete_pet(pet_id, api_key=None):  # noqa: E501
@@ -36,7 +40,11 @@ def delete_pet(pet_id, api_key=None):  # noqa: E501
 
     :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return impl.delete_pet(
+        pet_id,  # noqa: E501
+        api_key=api_key,  # noqa: E501
+    )
 
 
 def find_pets_by_status(status):  # noqa: E501
@@ -49,7 +57,10 @@ def find_pets_by_status(status):  # noqa: E501
 
     :rtype: Union[List[Pet], Tuple[List[Pet], int], Tuple[List[Pet], int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return impl.find_pets_by_status(
+        status=status,  # noqa: E501
+    )
 
 
 def find_pets_by_tags(tags):  # noqa: E501
@@ -62,7 +73,10 @@ def find_pets_by_tags(tags):  # noqa: E501
 
     :rtype: Union[List[Pet], Tuple[List[Pet], int], Tuple[List[Pet], int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return impl.find_pets_by_tags(
+        tags=tags,  # noqa: E501
+    )
 
 
 def get_pet_by_id(pet_id):  # noqa: E501
@@ -75,7 +89,10 @@ def get_pet_by_id(pet_id):  # noqa: E501
 
     :rtype: Union[Pet, Tuple[Pet, int], Tuple[Pet, int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return impl.get_pet_by_id(
+        pet_id,  # noqa: E501
+    )
 
 
 def update_pet(body):  # noqa: E501
@@ -90,7 +107,10 @@ def update_pet(body):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Pet.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+
+    return impl.update_pet(
+        body=body,  # noqa: E501
+    )
 
 
 def update_pet_with_form(pet_id, name=None, status=None):  # noqa: E501
@@ -107,7 +127,12 @@ def update_pet_with_form(pet_id, name=None, status=None):  # noqa: E501
 
     :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return impl.update_pet_with_form(
+        pet_id,  # noqa: E501
+        name=name,  # noqa: E501
+        status=status,  # noqa: E501
+    )
 
 
 def upload_file(pet_id, additional_metadata=None, file=None):  # noqa: E501
@@ -124,4 +149,9 @@ def upload_file(pet_id, additional_metadata=None, file=None):  # noqa: E501
 
     :rtype: Union[ApiResponse, Tuple[ApiResponse, int], Tuple[ApiResponse, int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return impl.upload_file(
+        pet_id,  # noqa: E501
+        additional_metadata=additional_metadata,  # noqa: E501
+        file=file,  # noqa: E501
+    )

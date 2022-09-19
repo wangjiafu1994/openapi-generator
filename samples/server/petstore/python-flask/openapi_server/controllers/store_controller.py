@@ -5,6 +5,7 @@ from typing import Tuple
 from typing import Union
 
 from openapi_server.models.order import Order  # noqa: E501
+from openapi_server import impl
 from openapi_server import util
 
 
@@ -18,7 +19,10 @@ def delete_order(order_id):  # noqa: E501
 
     :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return impl.delete_order(
+        order_id,  # noqa: E501
+    )
 
 
 def get_inventory():  # noqa: E501
@@ -29,7 +33,9 @@ def get_inventory():  # noqa: E501
 
     :rtype: Union[Dict[str, int], Tuple[Dict[str, int], int], Tuple[Dict[str, int], int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return impl.get_inventory(
+    )
 
 
 def get_order_by_id(order_id):  # noqa: E501
@@ -42,7 +48,10 @@ def get_order_by_id(order_id):  # noqa: E501
 
     :rtype: Union[Order, Tuple[Order, int], Tuple[Order, int, Dict[str, str]]
     """
-    return 'do some magic!'
+
+    return impl.get_order_by_id(
+        order_id,  # noqa: E501
+    )
 
 
 def place_order(body):  # noqa: E501
@@ -57,4 +66,7 @@ def place_order(body):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Order.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+
+    return impl.place_order(
+        body=body,  # noqa: E501
+    )

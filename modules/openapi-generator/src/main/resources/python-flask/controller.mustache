@@ -6,6 +6,7 @@ from typing import Union
 
 {{#imports}}{{import}}  # noqa: E501
 {{/imports}}
+from {{packageName}} import impl
 from {{packageName}} import util
 {{#operations}}
 {{#operation}}
@@ -110,6 +111,20 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
             {{/items}}
         {{/isMap}}
     {{/allParams}}
-    return 'do some magic!'
+
+    return impl.{{operationId}}(
+    {{#allParams}}
+        {{! path params as positional}}
+        {{#isPathParam}}
+        {{paramName}},  # noqa: E501
+        {{/isPathParam}}
+    {{/allParams}}
+    {{#allParams}}
+        {{! query params etc. as kwargs}}
+        {{^isPathParam}}
+        {{paramName}}={{paramName}},  # noqa: E501
+        {{/isPathParam}}
+    {{/allParams}}
+    )
 {{/operation}}
 {{/operations}}
